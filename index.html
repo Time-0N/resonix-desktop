@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonix</title>
+</head>
+<body>
+<div id="app">
+    <header class="header">
+        <h1>🎵 Resonix</h1>
+    </header>
+
+    <main class="main">
+        <div class="player-controls">
+            <button id="load-file">Load File</button>
+            <button id="play" disabled>Play</button>
+            <button id="pause" disabled>Pause</button>
+            <button id="stop" disabled>Stop</button>
+
+            <div class="volume-control">
+                <label>Volume:</label>
+                <input type="range" id="volume" min="0" max="100" value="50">
+                <span id="volume-display">50%</span>
+            </div>
+        </div>
+
+        <div class="track-info">
+            <div id="current-track">No track loaded</div>
+            <div id="track-progress">--:-- / --:--</div>
+        </div>
+    </main>
+</div>
+
+<script type="module" src="/ui/main.ts"></script>
+</body>
+</html>

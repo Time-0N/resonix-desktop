@@ -1,0 +1,19 @@
+{
+  "name": "resonix-desktop",
+  "version": "1.0.0",
+  "description": "Desktop Audioplayer with integrated selfhost for streaming",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "tauri": "tauri"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "typescript": "^5.0.0",
+    "sass": "^1.69.0"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.0.0"
+  }
+}

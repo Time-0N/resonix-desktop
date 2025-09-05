@@ -1,0 +1,100 @@
+// Variables
+$primary-color: #007acc;
+$primary-hover: #005999;
+$bg-gradient: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+$text-color: white;
+$border-color: #444;
+$disabled-color: #555;
+
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: $bg-gradient;
+  color: $text-color;
+  height: 100vh;
+}
+
+// Header
+.header {
+  padding: 20px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid $border-color;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 300;
+  }
+}
+
+// Main content
+.main {
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+// Player controls
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+
+  button {
+    padding: 12px 24px;
+    background: $primary-color;
+    color: $text-color;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+      background: $primary-hover;
+    }
+
+    &:disabled {
+      background: $disabled-color;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Volume control
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+
+  input[type="range"] {
+    width: 100px;
+  }
+}
+
+// Track info
+.track-info {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid $border-color;
+
+  #current-track {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  #track-progress {
+    color: #aaa;
+    font-size: 0.9rem;
+  }
+}
