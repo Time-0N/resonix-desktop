@@ -26,7 +26,7 @@ tauri-plugin-log = "2"
 tauri-plugin-dialog = "2.0"
 
 # Audio processing
-symphonia = { version = "0.5", features = ["mp3", "flac", "wav"] }
+symphonia = { version = "0.5", features = ["flac","mp3","vorbis","aac","wav","isomp4","ogg"] }
 cpal = "0.16.0"
 symphonia-bundle-mp3 = "0.5"
 symphonia-bundle-flac = "0.5"

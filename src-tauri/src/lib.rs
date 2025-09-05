@@ -12,7 +12,11 @@ pub fn run() {
             audio::load_audio_file,
             audio::play_audio,
             audio::pause_audio,
-            audio::stop_audio
+            audio::stop_audio,
+            audio::set_volume,
+            audio::get_duration,
+            audio::get_position,
+            audio::seek_to,
         ])
         .setup(|app| {
             if cfg!(debug_assertions) {
