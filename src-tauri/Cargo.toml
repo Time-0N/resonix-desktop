@@ -23,17 +23,32 @@ serde = { version = "1.0", features = ["derive"] }
 log = "0.4"
 tauri = { version = "2.8.5", features = [] }
 tauri-plugin-log = "2"
-tauri-plugin-dialog = "2.0"
+tauri-plugin-dialog = "2"
 
 # Audio processing
-symphonia = { version = "0.5", features = ["flac","mp3","vorbis","aac","wav","isomp4","ogg"] }
+symphonia = { version = "0.5", features = ["flac", "mp3", "vorbis", "aac", "wav", "isomp4", "ogg"] }
 cpal = "0.16.0"
 symphonia-bundle-mp3 = "0.5"
 symphonia-bundle-flac = "0.5"
 
 # File system & metadata
 walkdir = "2.4"
-lofty = "0.22.4"
+lofty = { version = "0.22.4"}
+base64 = "0.22"
 
 # Error handling
 anyhow = "1.0"
+ringbuf = "0.4.8"
+
+# image resize + encode
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp"] }
+# tiny hash for cache keys
+blake3 = "1.8.2"
+# portable app cache dir
+directories = "6.0.0"
+metaflac = "0.2"
+dirs = "6.0.0"
+
+r2d2 = "0.8"
+r2d2_sqlite = "0.31.0"
+rusqlite = { version = "0.37.0", features = ["bundled", "unlock_notify"] }
