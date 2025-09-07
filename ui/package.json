@@ -1,19 +1,30 @@
 {
-  "name": "resonix-desktop",
+  "name": "resonix-desktop-ui",
+  "private": true,
   "version": "1.0.0",
-  "description": "Desktop Audioplayer with integrated selfhost for streaming",
   "type": "module",
   "scripts": {
-    "dev": "../node_modules/.bin/vite",
-    "build": "../node_modules/.bin/vite build",
-    "tauri": "tauri"
-  },
-  "devDependencies": {
-    "vite": "^5.0.0",
-    "typescript": "^5.0.0",
-    "sass": "^1.69.0"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "lint": "eslint . --ext ts --report-unused-disable-directives --max-warnings 0",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@tauri-apps/api": "^2.0.0"
+    "@tauri-apps/api": "^2.0.0-rc.4",
+    "@tauri-apps/plugin-dialog": "2.4.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.0.0-rc.3",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.55.0",
+    "sass": "^1.69.5",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10"
   }
 }

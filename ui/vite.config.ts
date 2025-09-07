@@ -1,23 +1,28 @@
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
-    root: './ui',
-    build: {
-        outDir: 'dist',
-        rollupOptions: {
-            input: {
-                main: './ui/index.html',
-            },
-        },
+  root: __dirname,
+  base: '/',
+  build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: { main: path.resolve(__dirname, 'index.html') },
     },
-    resolve: {
-        alias: {
-            '@': '/src',
-            '@components': '/src/components',
-            '@services': '/src/services',
-            '@stores': '/src/stores',
-            '@utils': '/src/utils',
-            '@types': '/src/types',
-        },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@services': path.resolve(__dirname, './src/services'),
+      '@stores': path.resolve(__dirname, './src/stores'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@types': path.resolve(__dirname, './src/types'),
+      '@styles': path.resolve(__dirname, './src/styles'),
     },
+  },
+  server: { port: 3000, strictPort: true },
+  clearScreen: false,
+  envPrefix: ['VITE_', 'TAURI_'],
 });

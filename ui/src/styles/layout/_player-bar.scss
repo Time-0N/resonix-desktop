@@ -1,0 +1,341 @@
+// Player Bar Styles
+// =====================================================
+
+.player-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: $player-bar-height;
+  background: $bg-secondary;
+  border-top: 1px solid $border-subtle;
+  backdrop-filter: blur(20px);
+  z-index: $z-index-sticky;
+
+  @supports (backdrop-filter: blur(20px)) {
+    background: rgba($bg-secondary, 0.95);
+  }
+}
+
+.player-bar-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  padding: 0 $spacing-lg;
+  gap: $spacing-xl;
+  max-width: 1920px;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-md;
+    padding: $spacing-md;
+  }
+}
+
+// Track Info Section
+.player-track-info {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  min-width: 0;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.player-artwork {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: $radius-md;
+  background: $surface-2;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .player-artwork-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-muted;
+  }
+}
+
+.player-meta {
+  flex: 1;
+  min-width: 0;
+
+  .player-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+
+  .player-artist {
+    font-size: $font-size-xs;
+    color: $text-secondary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.player-favorite {
+  padding: $spacing-sm;
+  background: transparent;
+  border: none;
+  color: $text-secondary;
+  cursor: pointer;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+
+  &:hover {
+    background: $surface-2;
+    color: $text-primary;
+  }
+
+  &.active {
+    color: $error;
+
+    svg {
+      fill: currentColor;
+    }
+  }
+}
+
+// Playback Controls Section
+.player-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.player-buttons {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.player-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm;
+  background: transparent;
+  border: none;
+  color: $text-secondary;
+  cursor: pointer;
+  border-radius: $radius-md;
+  transition: all $transition-fast;
+  position: relative;
+
+  &:hover:not(:disabled) {
+    background: $surface-2;
+    color: $text-primary;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.primary {
+    width: 48px;
+    height: 48px;
+    background: $primary;
+    color: white;
+    border-radius: $radius-full;
+
+    &:hover:not(:disabled) {
+      background: $primary-light;
+      transform: scale(1.05);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+  }
+
+  &.active {
+    color: $primary;
+  }
+}
+
+.repeat-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  background: $primary;
+  color: white;
+  border-radius: $radius-full;
+  font-size: 8px;
+  font-weight: $font-weight-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Progress Bar
+.player-progress {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  width: 100%;
+  max-width: 600px;
+}
+
+.player-time {
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  font-variant-numeric: tabular-nums;
+  min-width: 40px;
+
+  &.current {
+    text-align: right;
+  }
+}
+
+.player-progress-container {
+  flex: 1;
+  position: relative;
+}
+
+.player-progress-track {
+  position: relative;
+  height: 4px;
+  background: $surface-3;
+  border-radius: $radius-full;
+  overflow: hidden;
+}
+
+.player-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: $primary;
+  border-radius: $radius-full;
+  transition: width $transition-fast;
+  pointer-events: none;
+}
+
+.player-progress-slider {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: $radius-full;
+    background: white;
+    box-shadow: $shadow-md;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: $radius-full;
+    background: white;
+    box-shadow: $shadow-md;
+    opacity: 0;
+    transition: opacity $transition-fast;
+  }
+
+  &:hover,
+  &:active {
+    &::-webkit-slider-thumb {
+      opacity: 1;
+    }
+
+    &::-moz-range-thumb {
+      opacity: 1;
+    }
+  }
+}
+
+// Extras Section
+.player-extras {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-md;
+
+  @media (max-width: $breakpoint-lg) {
+    display: none;
+  }
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.player-volume-slider-container {
+  width: 100px;
+  position: relative;
+
+  @media (max-width: $breakpoint-xl) {
+    display: none;
+  }
+}
+
+.player-volume-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: $surface-3;
+  border-radius: $radius-full;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: $radius-full;
+    background: white;
+    box-shadow: $shadow-sm;
+  }
+
+  &::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: $radius-full;
+    background: white;
+    box-shadow: $shadow-sm;
+  }
+}

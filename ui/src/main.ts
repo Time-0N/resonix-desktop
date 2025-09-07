@@ -1,13 +1,10 @@
-import './styles/main.scss';
+import '@/styles/main.scss';
 import { App } from './app';
 
-// Wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', () => {
-    const app = new App();
-    app.init();
-});
+const mount = async () => {
+  const root = document.getElementById('app')!;
+  const app = new App(root);
+  await app.mount();
+};
 
-// Handle window events
-window.addEventListener('beforeunload', () => {
-    // Cleanup
-});
+mount();

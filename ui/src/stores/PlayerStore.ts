@@ -1,55 +1,63 @@
-import { Track } from '../types/audio';
+import type { PlayerState, Track } from '@/types';
+import { TauriService } from '@/services/TauriService';
 
-interface PlayerState {
-    currentTrack: Track | null;
-    isPlaying: boolean;
-    currentTime: number;
-    duration: number;
-    volume: number;
-    queue: Track[];
-}
-
-type Subscriber = (state: PlayerState) => void;
+type Sub = (s: PlayerState) => void;
 
 export class PlayerStore {
-    private static instance: PlayerStore;
-    private state: PlayerState;
-    private subscribers: Set<Subscriber>;
+  private static _i: PlayerStore;
+  static get instance() { return this._i ??= new PlayerStore(); }
 
-    private constructor() {
-        this.state = {
-            currentTrack: null,
-            isPlaying: false,
-            currentTime: 0,
-            duration: 0,
-            volume: 1,
-            queue: []
-        };
-        this.subscribers = new Set();
-    }
+  private s: PlayerState = {
+    currentTrack: null, isPlaying: false, currentTime: 0, duration: 0, volume: 0.8, queue: [], queueIndex: -1
+  };
+  private subs = new Set<Sub>();
+  private timer: number | null = null;
+  private api = TauriService.instance;
 
-    static getInstance(): PlayerStore {
-        if (!PlayerStore.instance) {
-            PlayerStore.instance = new PlayerStore();
-        }
-        return PlayerStore.instance;
-    }
+  subscribe(fn: Sub){ this.subs.add(fn); fn(this.s); return () => this.subs.delete(fn); }
+  private emit(){ for(const fn of this.subs) fn(this.s); }
 
-    getState(): PlayerState {
-        return { ...this.state };
-    }
-
-    setState(updates: Partial<PlayerState>): void {
-        this.state = { ...this.state, ...updates };
-        this.notify();
-    }
-
-    subscribe(callback: Subscriber): () => void {
-        this.subscribers.add(callback);
-        return () => this.subscribers.delete(callback);
-    }
-
-    private notify(): void {
-        this.subscribers.forEach(callback => callback(this.state));
-    }
+  async playTrack(t: Track, queue?: Track[], index?: number){
+    if (queue) { this.s.queue = queue; this.s.queueIndex = index ?? queue.indexOf(t); }
+    this.s.currentTrack = t;
+    await this.api.loadAudioFile(t.path);
+    await this.api.play();
+    this.s.isPlaying = true;
+    this.startPolling();
+    this.emit();
+  }
+  async toggle(){
+    if (!this.s.currentTrack) return;
+    if (this.s.isPlaying){ await this.api.pause(); this.s.isPlaying = false; this.emit(); }
+    else { await this.api.play(); this.s.isPlaying = true; this.emit(); }
+  }
+  async stop(){
+    await this.api.stop();
+    this.s.isPlaying = false; this.s.currentTime = 0; this.emit();
+    this.stopPolling();
+  }
+  async setVolume(v: number){
+    this.s.volume = v; this.emit();
+    await this.api.setVolume(v);
+  }
+  async seek(sec: number){
+    this.s.currentTime = sec; this.emit();
+    await this.api.seekTo(sec);
+  }
+  private startPolling(){
+    if (this.timer) return;
+    const tick = async () => {
+      try {
+        this.s.currentTime = await this.api.getPosition();
+        this.s.duration = await this.api.getDuration();
+        this.emit();
+      } catch {}
+    };
+    // @ts-ignore
+    this.timer = window.setInterval(tick, 500);
+  }
+  private stopPolling(){
+    if (this.timer){ clearInterval(this.timer); this.timer = null; }
+  }
+  cleanup(){ this.stopPolling(); this.subs.clear(); }
 }
