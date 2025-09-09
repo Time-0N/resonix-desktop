@@ -1,0 +1,118 @@
+// ===========================
+// Color System
+// ===========================
+
+// Primary colors - using a green similar to Spotify
+$primary: #1db954;
+$primary-dark: #1aa34a;
+$primary-light: #1ed760;
+$primary-glow: rgba(29, 185, 84, 0.4);
+
+// Background colors - darker, more premium feel
+$bg-gradient: linear-gradient(180deg, #121212 0%, #000000 100%);
+$bg-dark: #000000;
+$bg-base: #121212;
+$bg-elevated: #181818;
+$bg-highlight: #282828;
+
+// Panel/Surface colors - refined glass effects
+$panel: rgba(255, 255, 255, 0.05);
+$panel-solid: #181818;
+$panel-hover: rgba(255, 255, 255, 0.1);
+$panel-active: rgba(255, 255, 255, 0.15);
+$panel-border: rgba(255, 255, 255, 0.1);
+
+// Text colors - better contrast
+$text-primary: #ffffff;
+$text-secondary: #b3b3b3;
+$text-muted: #7a7a7a;
+$text-inverse: #000000;
+
+// State colors
+$success: #1db954;
+$warning: #ffa42b;
+$error: #f15e6c;
+$info: #509bf5;
+
+// ===========================
+// Spacing System
+// ===========================
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 12px;
+$spacing-lg: 16px;
+$spacing-xl: 24px;
+$spacing-2xl: 32px;
+$spacing-3xl: 48px;
+
+// ===========================
+// Typography
+// ===========================
+$font-family: 'Helvetica Neue', Helvetica, Arial, 'Hiragino Kaku Gothic Pro',
+'Meiryo', 'MS Gothic', sans-serif;
+$font-size-xs: 0.6875rem;  // 11px
+$font-size-sm: 0.8125rem;  // 13px
+$font-size-base: 0.875rem; // 14px
+$font-size-lg: 1rem;        // 16px
+$font-size-xl: 1.25rem;     // 20px
+$font-size-2xl: 1.75rem;    // 28px
+
+// Font weights
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// ===========================
+// Border Radius
+// ===========================
+$radius-xs: 4px;
+$radius-sm: 6px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-full: 9999px;
+
+// ===========================
+// Transitions
+// ===========================
+$transition-fast: 0.1s ease;
+$transition-base: 0.2s ease;
+$transition-slow: 0.3s ease;
+$transition-spring: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// ===========================
+// Shadows
+// ===========================
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+$shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.5);
+
+// ===========================
+// Z-index layers
+// ===========================
+$z-base: 1;
+$z-dropdown: 10;
+$z-sticky: 20;
+$z-overlay: 40;
+$z-modal: 50;
+$z-player: 100; // Player should be above most things
+$z-fab: 60;
+$z-tooltip: 70;
+$z-notification: 80;
+
+// ===========================
+// Breakpoints
+// ===========================
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+
+// ===========================
+// Player Specific
+// ===========================
+$player-height: 90px;
+$player-height-mobile: 110px;

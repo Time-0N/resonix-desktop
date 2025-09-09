@@ -1,0 +1,133 @@
+@use 'variables' as *;
+
+// ===========================
+// Glass morphism effect
+// ===========================
+@mixin glass($bg-opacity: 0.04, $blur: 6px) {
+  background: rgba(255, 255, 255, $bg-opacity);
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $panel-border;
+}
+
+// ===========================
+// Button base
+// ===========================
+@mixin button-base {
+  border: 1px solid $panel-border;
+  background: rgba(255, 255, 255, 0.06);
+  color: $text-primary;
+  border-radius: $radius-lg;
+  padding: $spacing-sm $spacing-lg;
+  cursor: pointer;
+  transition: background $transition-base, transform $transition-fast;
+  font-family: inherit;
+  font-size: inherit;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary;
+    outline-offset: 2px;
+  }
+}
+
+// ===========================
+// Text truncation
+// ===========================
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// ===========================
+// Center content
+// ===========================
+@mixin center($type: 'both') {
+  display: grid;
+
+  @if $type == 'both' {
+    place-items: center;
+  } @else if $type == 'horizontal' {
+    justify-content: center;
+  } @else if $type == 'vertical' {
+    align-items: center;
+  }
+}
+
+// ===========================
+// Responsive media queries
+// ===========================
+@mixin mobile {
+  @media (max-width: #{$breakpoint-sm}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$breakpoint-md}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-lg}) {
+    @content;
+  }
+}
+
+// ===========================
+// Custom scrollbar
+// ===========================
+@mixin custom-scrollbar(
+  $width: 8px,
+  $track-bg: $panel,
+  $thumb-bg: $panel-border
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-bg;
+    border-radius: $radius-full;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-bg;
+    border-radius: $radius-full;
+
+    &:hover {
+      background: lighten($thumb-bg, 10%);
+    }
+  }
+}
+
+// ===========================
+// Animation keyframes
+// ===========================
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+}

@@ -1,0 +1,23 @@
+// ===========================
+// Main SCSS Entry Point
+// ===========================
+
+// 1. Abstracts (variables, mixins, functions)
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+
+// 2. Base styles (reset, typography)
+@use 'base/reset';
+
+// 3. Layout
+//@use 'layout/header';
+//@use 'layout/main';
+
+// 4. Components
+@use 'components/buttons';
+@use 'components/player';
+//@use 'components/modals';
+//@use 'components/library';
+
+// 5. Utilities (optional)
+//@use 'utilities/helpers';
